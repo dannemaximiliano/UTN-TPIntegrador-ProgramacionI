@@ -3,6 +3,7 @@ import csv
 
 
 def obtenerRutaArchivoCsv():
+    # Devuelve la ruta completa del archivo CSV de paises
     nombreCarpeta = "datos"
     nombreArchivo = "paises.csv"
     rutaCompleta = os.path.join(nombreCarpeta, nombreArchivo)
@@ -10,6 +11,7 @@ def obtenerRutaArchivoCsv():
 
 
 def cargarPaisesDesdeCsv(rutaArchivoCsv):
+    # Carga los paises desde el CSV y retorna una lista de diccionarios
     listaPaises = []
     with open(rutaArchivoCsv, "r", newline="") as archivo:
         read = csv.DictReader(archivo)
@@ -41,6 +43,7 @@ def cargarPaisesDesdeCsv(rutaArchivoCsv):
 
 
 def guardarPaisesEnCsv(rutaArchivoCsv, listaPaises):
+    # Guarda la lista de paises nuevamente en el archivo CSV
     with open(rutaArchivoCsv, "w", newline="", encoding="utf-8") as archivo:
         campos = ["nombre", "poblacion", "superficie", "continente"]
         write = csv.DictWriter(archivo, fieldnames=campos)
@@ -57,6 +60,7 @@ def guardarPaisesEnCsv(rutaArchivoCsv, listaPaises):
 
 
 def validacionTextoNoVacio(mensaje):
+    # Solicita y valida ingreso de texto no vacio
     texto = input(mensaje).strip()
     while texto == "":
         print("El valor no puede ser vacio")
@@ -65,6 +69,7 @@ def validacionTextoNoVacio(mensaje):
 
 
 def validacionNumeroPositivo(mensaje):
+    # Solicita y valida ingreso de número entero positivo
     texto = input(mensaje).strip()
     while not texto.isdigit() or int(texto) <= 0:
         print("Debe ingresar un numero entero positivo")
@@ -73,6 +78,7 @@ def validacionNumeroPositivo(mensaje):
 
 
 def mostrarMenuPrincipal():
+    # Muestra el menú principal del sistema en consola
     print("...::: MENÚ PRINCIPAL :::...")
     print("1 - Agregar pais")
     print("2 - Actualizar población y superficie de un pais")
@@ -89,6 +95,7 @@ def mostrarMenuPrincipal():
 
 
 def mostrarListaPaises(listaPaises):
+    # Muestra la lista completa de paises formateada en pantalla
     if len(listaPaises) == 0:
         print("No hay paises para mostrar")
         return
@@ -109,6 +116,7 @@ def mostrarListaPaises(listaPaises):
 
 # Opción 1
 def agregarPais(listaPaises):
+    # Agrega un nuevo pais a la lista con datos validados
     print("...::: Agregar pais :::...")
     nombre = validacionTextoNoVacio("Nombre: ")
     poblacion = validacionNumeroPositivo("Población: ")
@@ -126,6 +134,7 @@ def agregarPais(listaPaises):
 
 
 def buscarIndicePaisPorNombre(listaPaises, nombreBuscado):
+    # Busca el índice de un pais por nombre exacto (retorna -1 si no existe)
     nombreBuscadoMin = nombreBuscado.lower()
     indiceEncontrado = -1
     indice = 0
@@ -139,6 +148,7 @@ def buscarIndicePaisPorNombre(listaPaises, nombreBuscado):
 
 # Opcion 2
 def actualizarPais(listaPaises):
+    # Actualiza población y superficie de un pais existente
     print("...::: Actualizar pais :::...")
     if len(listaPaises) == 0:
         print("No hay paises cargados para actualizar")
@@ -164,6 +174,7 @@ def actualizarPais(listaPaises):
 
 # Opcion 3
 def buscarPaisPorNombre(listaPaises):
+    # Busca y muestra paises que coincidan parcialmente con el nombre ingresado
     print("...::: Buscar pais por nombre :::...")
     if len(listaPaises) == 0:
         print("No hay paises cargados")
@@ -183,6 +194,7 @@ def buscarPaisPorNombre(listaPaises):
 
 # Opcion 4
 def filtrarPorContinente(listaPaises):
+    # Filtra paises por continente ingresado
     print("...::: Filtrar paises por continente :::...")
     if len(listaPaises) == 0:
         print("No hay paises cargados")
@@ -202,6 +214,7 @@ def filtrarPorContinente(listaPaises):
 
 # Opcion 5
 def filtrarPorRangoPoblacion(listaPaises):
+    # Filtra paises por rango de población definido por el usuario
     print("...::: Filtrar paises por rango de población :::...")
     if len(listaPaises) == 0:
         print("No hay paises cargados")
@@ -228,6 +241,7 @@ def filtrarPorRangoPoblacion(listaPaises):
 
 # Opcion 6
 def filtrarPorRangoSuperficie(listaPaises):
+    # Filtra paises por rango de superficie definido por el usuario
     print("...::: Filtrar paises por rango de superficie :::...")
     if len(listaPaises) == 0:
         print("No hay paises cargados")
@@ -253,18 +267,22 @@ def filtrarPorRangoSuperficie(listaPaises):
 
 
 def obtenerNombrePais(pais):
+    # Retorna el nombre del pais (para usar como clave en ordenamiento)
     return pais["nombre"]
 
 
 def obtenerPoblacionPais(pais):
+    # Retorna la población del pais (para ordenar)
     return pais["poblacion"]
 
 
 def obtenerSuperficiePais(pais):
+    # Retorna la superficie del pais (para ordenar)
     return pais["superficie"]
 
 # Opcion 7
 def ordenarPorNombre(listaPaises):
+    # Ordena y muestra paises por nombre en forma ascendente
     print("...::: Ordenar paises por nombre :::...")
     if len(listaPaises) == 0:
         print("No hay paises cargados")
@@ -276,6 +294,7 @@ def ordenarPorNombre(listaPaises):
 
 # Opcion 8
 def ordenarPorPoblacion(listaPaises):
+    # Ordena y muestra paises por población en forma ascendente
     print("...::: Ordenar paises por población :::...")
     if len(listaPaises) == 0:
         print("No hay paises cargados")
@@ -286,6 +305,7 @@ def ordenarPorPoblacion(listaPaises):
 
 # Opcion 9
 def ordenarPorSuperficie(listaPaises):
+    # Ordena y muestra paises por superficie ascendente o descendente
     print("...::: Ordenar paises por superficie :::...")
     if len(listaPaises) == 0:
         print("No hay paises cargados")
@@ -309,6 +329,7 @@ def ordenarPorSuperficie(listaPaises):
 
 # Opcion 10
 def mostrarEstadisticas(listaPaises):
+    # Calcula y muestra estadísticas generales sobre los paises cargados
     print("...::: Estadísticas :::...")
     if len(listaPaises) == 0:
         print("No hay paises cargados")
@@ -353,6 +374,7 @@ def mostrarEstadisticas(listaPaises):
 
 # Menú principal
 def ejecutarPrograma():
+    # Carga CSV, muestra menú y ejecuta opciones
     rutaArchivoCsv = obtenerRutaArchivoCsv()
     listaPaises = cargarPaisesDesdeCsv(rutaArchivoCsv)
 
